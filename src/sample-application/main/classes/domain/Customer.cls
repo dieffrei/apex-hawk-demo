@@ -4,4 +4,12 @@ public virtual inherited sharing class Customer extends Entity {
         super(Account.SObjectType);
     }
 
+    public void deactivate(){
+
+    }
+
+    public void activate(){
+
+    }
+
 }
