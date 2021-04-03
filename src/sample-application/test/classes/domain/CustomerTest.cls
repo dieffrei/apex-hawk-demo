@@ -1,5 +1,5 @@
 @IsTest
-public class CustomerTest {
+private class CustomerTest {
 
     @IsTest
     public static void constructor() {
