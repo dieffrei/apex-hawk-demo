@@ -9,6 +9,9 @@
     },
     {
       "path": "src/apex-hawk"
+    },
+    {
+      "path": "src/sample-application"
     }
   ],
   "namespace": "",
