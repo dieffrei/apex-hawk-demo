@@ -17,11 +17,11 @@ public inherited sharing class CustomerServiceImpl implements CustomerService {
     }
 
     public void activate(ITransaction salesforceTransaction, List<Id> customerIds) {
-        List<Customer> customers = null; //this.customerRepository.find()
-        for (Customer customer : customers) {
+        for (IEntity iEntity : this.customerRepository.find().byId(new Set<Id>(customerIds)).toList()) {
+            Customer customer = (Customer) iEntity;
             customer.activate();
+            customerRepository.save(salesforceTransaction, customer);
         }
-        customerRepository.save(salesforceTransaction, customers);
     }
 
     public void deactivate(ITransaction salesforceTransaction, List<Id> customerIds) {
