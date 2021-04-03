@@ -1,8 +1,14 @@
 {
   "packageDirectories": [
     {
-      "path": "force-app",
+      "path": "src/apex-mock",
       "default": true
+    },
+    {
+      "path": "src/apex-commons"
+    },
+    {
+      "path": "src/apex-hawk"
     }
   ],
   "namespace": "",
