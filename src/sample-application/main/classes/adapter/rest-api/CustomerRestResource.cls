@@ -1,0 +1,16 @@
+@RestResource(UrlMapping='/customer/onboard')
+global with sharing class CustomerRestResource {
+
+    global class CustomerNewRequest {
+        public String firstName;
+        public String lastName;
+    }
+
+    @HttpPost
+    global static String createCustomer(List<CustomerNewRequest> requests){
+        CustomerService customerService = (CustomerService) di_Injector.Org.getInstance(CustomerService.class);
+        ITransaction salesforceTransaction = null;
+        customerService.create(salesforceTransaction, null);
+        return null;
+    }
+}

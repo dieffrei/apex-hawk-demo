@@ -1,4 +1,4 @@
-public inherited sharing class CustomerBuilder {
+public virtual inherited sharing class CustomerBuilder {
 
     public CustomerBuilder(){
 
