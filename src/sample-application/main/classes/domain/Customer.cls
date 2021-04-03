@@ -5,11 +5,11 @@ public virtual inherited sharing class Customer extends Entity {
     }
 
     public void deactivate(){
-
+        put(Account.IsActive__c, false);
     }
 
     public void activate(){
-
+        put(Account.IsActive__c, true);
     }
 
 }
