@@ -11,6 +11,9 @@
       "path": "src/apex-hawk"
     },
     {
+      "path": "src/force-di"
+    },
+    {
       "path": "src/sample-application"
     }
   ],
