@@ -3,15 +3,15 @@ public inherited sharing class SaleOpportunityServiceImpl implements SaleOpportu
     private SaleOpportunityRepository saleOpportunityRepository;
 
     public SaleOpportunityServiceImpl() {
-        this.saleOpportunityRepository = saleOpportunityRepository;
+        this.saleOpportunityRepository = (SaleOpportunityRepository) di_Injector.Org.getInstance(SaleOpportunityRepository.class);
     }
 
-    public Map<Id, SaleOpportunity> getById(Set<Id> opportunityIds) {
+    public Map<Id, SaleOpportunity> getById(List<Id> opportunityIds) {
         return new Map<Id, SaleOpportunity>();
     }
 
-    public void applyDiscount(ITransaction salesforceTransaction, Set<Id> opportunityIds, Decimal factor) {
-        for (SaleOpportunity opportunity : this.saleOpportunityRepository.getById(opportunityIds)) {
+    public void applyDiscount(ITransaction salesforceTransaction, List<Id> opportunityIds, Decimal factor) {
+        for (SaleOpportunity opportunity : this.saleOpportunityRepository.getById(opportunityIds).values()) {
             opportunity.applyDiscount(factor);
         }
     }
