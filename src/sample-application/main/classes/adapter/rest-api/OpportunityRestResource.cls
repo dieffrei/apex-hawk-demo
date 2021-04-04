@@ -10,8 +10,10 @@ global with sharing class OpportunityRestResource {
 
     @HttpPatch
     global static void applyDiscount(List<Id> opportunityIds, Decimal factor) {
+        ITransaction salesforceTransaction = new TransactionFactory().begin();
         SaleOpportunityService opportunityService = (SaleOpportunityService) di_Injector.Org.getInstance(SaleOpportunityService.class);
-        opportunityService.applyDiscount(new Set<Id>(opportunityIds), factor);
+        opportunityService.applyDiscount(salesforceTransaction, new Set<Id>(opportunityIds), factor);
+        salesforceTransaction.commitZ();
     }
 
 }
