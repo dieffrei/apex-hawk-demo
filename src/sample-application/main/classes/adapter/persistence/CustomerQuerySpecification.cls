@@ -14,8 +14,6 @@ public virtual inherited sharing class CustomerQuerySpecification extends QueryS
     public List<SObjectField> getSObjectFieldList() {
         return new List<SObjectField>{
             Schema.Account.Id
-//            Schema.Account.FirstName,
-//            Schema.Account.LastName
         };
     }
 
