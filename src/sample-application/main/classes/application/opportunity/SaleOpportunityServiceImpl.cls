@@ -2,7 +2,7 @@ public inherited sharing class SaleOpportunityServiceImpl implements SaleOpportu
 
     private SaleOpportunityRepository saleOpportunityRepository;
 
-    public SaleOpportunityServiceImpl(){
+    public SaleOpportunityServiceImpl() {
         this.saleOpportunityRepository = saleOpportunityRepository;
     }
 
@@ -11,7 +11,7 @@ public inherited sharing class SaleOpportunityServiceImpl implements SaleOpportu
     }
 
     public void applyDiscount(ITransaction salesforceTransaction, Set<Id> opportunityIds, Decimal factor) {
-        for (SaleOpportunity opportunity : this.saleOpportunityRepository.getById(opportunityIds)){
+        for (SaleOpportunity opportunity : this.saleOpportunityRepository.getById(opportunityIds)) {
             opportunity.applyDiscount(factor);
         }
     }

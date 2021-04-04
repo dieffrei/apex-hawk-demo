@@ -4,6 +4,6 @@ public interface CustomerService {
      * @param commands
      */
     void create(ITransaction salesforceTransaction, List<NewCustomerCommand> commands);
-    void activate(ITransaction salesforceTransaction,List<Id> customerIds);
+    void activate(ITransaction salesforceTransaction, List<Id> customerIds);
     void deactivate(ITransaction salesforceTransaction, List<Id> customerIds);
 }

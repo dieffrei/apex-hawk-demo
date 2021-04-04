@@ -5,16 +5,16 @@ public virtual inherited sharing class Customer extends Entity {
         super(Account.SObjectType);
     }
 
-    public void deactivate(){
+    public void deactivate() {
         put(Account.IsActive__c, false);
     }
 
-    public void activate(){
+    public void activate() {
         put(Account.IsActive__c, true);
     }
 
-    public Boolean isActive(){
-        return (Boolean)get(Account.IsActive__c);
+    public Boolean isActive() {
+        return (Boolean) get(Account.IsActive__c);
     }
 
 }
