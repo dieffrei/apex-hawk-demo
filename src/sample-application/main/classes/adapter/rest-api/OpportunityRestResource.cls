@@ -1,11 +1,18 @@
 @RestResource(UrlMapping='/opportunity/discount')
 global with sharing class OpportunityRestResource {
 
+    public static final String OPPORTUNITY_PARAM_NAME = 'opportunityId';
+
     @HttpGet
-    global static String getOpportunityById() {
-        List<Id> opportunityIds = null;
+    global static String getOpportunity() {
+        Id opportunityId = RestContext.request.params.get(OPPORTUNITY_PARAM_NAME);
         SaleOpportunityService opportunityService = (SaleOpportunityService) di_Injector.Org.getInstance(SaleOpportunityService.class);
-        return JSON.serialize(opportunityService.getById(opportunityIds));
+        Map<Id, SaleOpportunity> saleOpportunities = opportunityService.getById(new List<Id>{
+            opportunityId
+        });
+        return (saleOpportunities != null && saleOpportunities.containsKey(opportunityId))
+            ? JSON.serialize(saleOpportunities.get(opportunityId))
+            : null;
     }
 
     @HttpPatch
