@@ -6,8 +6,7 @@ public virtual inherited sharing class SaleOpportunityBuilder extends SaleOpport
 
     public SaleOpportunityBuilder addItem(SaleOpportunityLineItemBuilder itemBuilder) {
         SaleOpportunityLineItem item = itemBuilder.build();
-        item.addObserver(this);
-        super.items.add(item);
+        this.items.add(item);
         return this;
     }
 
