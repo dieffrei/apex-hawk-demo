@@ -23,6 +23,9 @@ private class SaleOpportunityServiceImplTest {
                 .quantity(10))
             .build();
 
+        final Decimal initialTotalValue = saleOpportunity.getTotalValue();
+        final Decimal initialTotalValueMinus10Percent = initialTotalValue - ((initialTotalValue / 100) * 10);
+
         fflib_ApexMocks mocks = new fflib_ApexMocks();
         SaleOpportunityRepository opportunityRepository = (SaleOpportunityRepository) mocks.mock(SaleOpportunityRepository.class);
         Id opportunityId = fflib_IDGenerator.generate(Opportunity.SObjectType);
@@ -40,13 +43,9 @@ private class SaleOpportunityServiceImplTest {
             .toObject(opportunityRepository));
 
         new SaleOpportunityServiceImpl()
-            .applyDiscount(null, new List<Id>{
-        }, 10);
+            .applyDiscount(null, new List<Id>{opportunityId }, 10);
 
-    }
-
-    @IsTest
-    static void applyDiscoun_WithLines_CheckTotalValue() {
+        System.assertEquals(initialTotalValueMinus10Percent, saleOpportunity.getTotalValue());
 
     }
 

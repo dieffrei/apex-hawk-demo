@@ -7,12 +7,15 @@ public inherited sharing class SaleOpportunityServiceImpl implements SaleOpportu
     }
 
     public Map<Id, SaleOpportunity> getById(List<Id> opportunityIds) {
-        return new Map<Id, SaleOpportunity>();
+        return this.saleOpportunityRepository.getById(opportunityIds);
     }
 
     public void applyDiscount(ITransaction salesforceTransaction, List<Id> opportunityIds, Decimal factor) {
-        for (SaleOpportunity opportunity : this.saleOpportunityRepository.getById(opportunityIds).values()) {
+        Map<Id, SaleOpportunity> opportunities = this.saleOpportunityRepository.getById(opportunityIds);
+        for (SaleOpportunity opportunity : opportunities.values()) {
             opportunity.applyDiscount(factor);
+            saleOpportunityRepository.save(salesforceTransaction, opportunity);
         }
     }
+
 }

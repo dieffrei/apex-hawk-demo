@@ -1,15 +1,21 @@
-public inherited sharing class SaleOpportunityLineItemBuilder {
+public virtual inherited sharing class SaleOpportunityLineItemBuilder extends SaleOpportunityLineItem {
+
+    public SaleOpportunityLineItemBuilder() {
+        super();
+    }
 
     public SaleOpportunityLineItemBuilder quantity(Decimal quantity) {
+        put(OpportunityLineItem.Quantity, quantity);
         return this;
     }
 
     public SaleOpportunityLineItemBuilder unitPrice(Decimal unitPrice) {
+        put(OpportunityLineItem.UnitPrice, unitPrice);
         return this;
     }
 
-    SaleOpportunityLineItem build(){
-        return null;
+    public SaleOpportunityLineItem build() {
+        return this;
     }
 
 }
