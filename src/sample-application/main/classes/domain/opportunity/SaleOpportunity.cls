@@ -1,9 +1,14 @@
-public virtual inherited sharing class SaleOpportunity extends Entity {
+global virtual inherited sharing class SaleOpportunity extends Entity {
 
     protected List<SaleOpportunityLineItem> items;
 
     protected SaleOpportunity() {
         super(Opportunity.SObjectType);
+        this.items = new List<SaleOpportunityLineItem>();
+    }
+
+    protected SaleOpportunity(Opportunity record) {
+        super(record);
         this.items = new List<SaleOpportunityLineItem>();
     }
 

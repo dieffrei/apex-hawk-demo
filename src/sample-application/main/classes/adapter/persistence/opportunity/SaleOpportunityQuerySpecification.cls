@@ -17,4 +17,9 @@ public inherited sharing class SaleOpportunityQuerySpecification extends QuerySp
         };
     }
 
+    public QueryResult findById(Set<Id> opportunityIds) {
+        super.queryFactory.setCondition('Id IN :opportunityIds');
+        return new QueryResult(this.entityBuilder, Database.query(this.queryFactory.toSOQL()));
+    }
+
 }
