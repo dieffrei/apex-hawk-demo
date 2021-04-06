@@ -8,7 +8,7 @@ global with sharing class CustomerRestResource {
 
     @HttpPost
     global static String createCustomer(List<CustomerNewRequest> requests) {
-        CustomerService customerService = (CustomerService) di_Injector.Org.getInstance(CustomerService.class);
+        CustomerService customerService = (CustomerService) Injector.getInstance(CustomerService.class);
         ITransaction salesforceTransaction = new TransactionFactory().begin();
         customerService.create(salesforceTransaction, null);
         return null;
