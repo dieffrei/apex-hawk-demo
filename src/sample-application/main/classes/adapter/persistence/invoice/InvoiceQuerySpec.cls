@@ -1,9 +1,9 @@
-public inherited sharing class InvoiceQuerySpecification extends QuerySpecification {
+public inherited sharing class InvoiceQuerySpec extends QuerySpecification {
 
-    public InvoiceQuerySpecification() {
+    public InvoiceQuerySpec() {
     }
 
-    public InvoiceQuerySpecification(IEntityBuilder entityBuilder) {
+    public InvoiceQuerySpec(IEntityBuilder entityBuilder) {
         super(entityBuilder);
     }
 

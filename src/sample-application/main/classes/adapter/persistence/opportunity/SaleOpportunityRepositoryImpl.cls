@@ -1,6 +1,6 @@
 public virtual inherited sharing class SaleOpportunityRepositoryImpl implements SaleOpportunityRepository {
 
-    private SaleOpportunityQuerySpecification querySpecification;
+    private SaleOpportunityQuerySpec querySpecification;
 
     @TestVisible
     private class SaleOpportunityBuilder extends SaleOpportunity implements IEntityBuilder {
@@ -10,15 +10,15 @@ public virtual inherited sharing class SaleOpportunityRepositoryImpl implements 
     }
 
     @TestVisible
-    private SaleOpportunityRepositoryImpl(SaleOpportunityQuerySpecification querySpecification) {
+    private SaleOpportunityRepositoryImpl(SaleOpportunityQuerySpec querySpecification) {
         this.querySpecification = querySpecification;
     }
 
     public SaleOpportunityRepositoryImpl() {
-        this.querySpecification = new SaleOpportunityQuerySpecification(new SaleOpportunityBuilder());
+        this.querySpecification = new SaleOpportunityQuerySpec(new SaleOpportunityBuilder());
     }
 
-    public SaleOpportunityQuerySpecification find() {
+    public SaleOpportunityQuerySpec find() {
         return this.querySpecification;
     }
 

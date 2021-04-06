@@ -1,5 +1,5 @@
 public interface CustomerRepository {
-    CustomerQuerySpecification find();
+    CustomerQuerySpec find();
     List<Customer> getById(List<Id> customerIds);
     void save(ITransaction sfTransaction, Customer customer);
     void save(ITransaction sfTransaction, List<Customer> customers);

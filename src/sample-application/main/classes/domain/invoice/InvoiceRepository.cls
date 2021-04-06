@@ -1,5 +1,5 @@
 public interface InvoiceRepository {
-    InvoiceQuerySpecification find();
+    InvoiceQuerySpec find();
     List<Invoice> getById(List<Id> invoiceIds);
     void save(ITransaction sfTransaction, Invoice invoice);
     void save(ITransaction sfTransaction, List<Invoice> invoices);

@@ -1,9 +1,9 @@
-public virtual inherited sharing class CustomerQuerySpecification extends QuerySpecification {
+public virtual inherited sharing class CustomerQuerySpec extends QuerySpecification {
 
-    public CustomerQuerySpecification() {
+    public CustomerQuerySpec() {
     }
 
-    public CustomerQuerySpecification(IEntityBuilder entityBuilder) {
+    public CustomerQuerySpec(IEntityBuilder entityBuilder) {
         super(entityBuilder);
     }
 
