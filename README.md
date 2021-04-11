@@ -201,6 +201,7 @@ How to persist an entity instance state?
     salesforceTransaction.commitZ();
 ```
 - ### Orchestrating and composing transactions
+    To provide better orchestration of persistence, provide for your methods transaction parameters.
 ```apex
     SFTransaction salesforceTransaction;
     {
