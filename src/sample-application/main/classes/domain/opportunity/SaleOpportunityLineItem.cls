@@ -1,4 +1,4 @@
-public virtual inherited sharing class SaleOpportunityLineItem extends Entity {
+global virtual inherited sharing class SaleOpportunityLineItem extends Entity {
 
     protected SaleOpportunityLineItem() {
         super(OpportunityLineItem.SObjectType);
@@ -15,6 +15,10 @@ public virtual inherited sharing class SaleOpportunityLineItem extends Entity {
 
     public Decimal getUnitPrice() {
         return (Decimal) get(OpportunityLineItem.UnitPrice);
+    }
+
+    public Decimal getQuantity() {
+        return (Decimal) get(OpportunityLineItem.Quantity);
     }
 
     public Decimal getTotalPrice() {
