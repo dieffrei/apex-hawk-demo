@@ -1,6 +1,58 @@
-# Salesforce DX Project: Next Steps
+# Salesforce Apex Hawk
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+The purpose of apex hawk is to facilitate ability to apply SOLID principles, good coding practices it born in a attemp to apply Dom Driven Design concepts.
+One of the biggest problems in salesforce development is that everything is tight to database, since of nature of salesforce, it makes the thing really difficult to decouple them.
+
+## Building blocks
+An application can be split into smaller block, each one has very specific responsibility
+- ### Domains objects
+  Domain object are abstractions on top of SObjects.
+  To create a Domain object just extend Entity class.
+  Entity instances are persisted to database using SFTransaction (ApexHawk UnitOfWork implementation).
+  Only changed field values are persisted to database. 
+  (It is possible since entity classes implements Observer pattern.
+
+```
+public virtual inherited sharing class SaleOpportunity extends Entity {
+
+  public List<SaleOpportunityLineItem> items { public get; protected set; }
+
+  protected SaleOpportunity() {
+    super(Opportunity.SObjectType);
+    this.items = new List<SaleOpportunityLineItem>();
+  }
+
+  protected SaleOpportunity(Opportunity record) {
+    super(record);
+    this.items = new List<SaleOpportunityLineItem>();
+    for (OpportunityLineItem item : record.OpportunityLineItems) {
+        this.items.add(new SaleOpportunityLineItem(item));
+    }
+  }
+
+  public void applyDiscount(Decimal factor) {
+    for (SaleOpportunityLineItem item : items) {
+        item.applyDiscount(factor);
+    }
+  }
+
+  public Decimal getTotalValue() {
+    Decimal totalValue = 0;
+    for (SaleOpportunityLineItem item : items) {
+        totalValue = totalValue + item.getTotalPrice();
+    }
+    return totalValue;
+  }
+
+}
+```
+  
+- ### Repositories
+
+  
+- ### Query Specifications
+- ### Application Services
+
 
 ## How Do You Plan to Deploy Your Changes?
 
