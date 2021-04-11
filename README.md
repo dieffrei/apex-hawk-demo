@@ -12,7 +12,7 @@ An application can be split into smaller block, each one has very specific respo
   Only changed field values are persisted to database. 
   (It is possible since entity classes implements Observer pattern.
 
-```
+```apex
 public virtual inherited sharing class SaleOpportunity extends Entity {
 
   public List<SaleOpportunityLineItem> items { public get; protected set; }
@@ -46,8 +46,19 @@ public virtual inherited sharing class SaleOpportunity extends Entity {
 
 }
 ```
-  
+
 - ### Repositories
+    - #### Repository interfaces
+      ```apex
+        public interface SaleOpportunityRepository {
+            SaleOpportunityQuerySpec find();
+            Map<Id, SaleOpportunity> getById(List<Id> saleOpportunityIds);
+            void save(ITransaction sfTransaction, SaleOpportunity salesOpportunity);
+            void save(ITransaction sfTransaction, List<SaleOpportunity> saleOpportunities);
+            void remove(ITransaction sfTransaction, List<SaleOpportunity> saleOpportunities);
+        }
+``` 
+    - #### Repository interfaces
 
   
 - ### Query Specifications
