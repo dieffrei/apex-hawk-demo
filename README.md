@@ -4,48 +4,49 @@ The purpose of apex hawk is to facilitate ability to apply SOLID principles, goo
 It was born in an attempt to apply Dom Driven Design concepts.
 
 ## Building blocks
-An application can be split into smaller block, each one has very specific responsibility
+An application can be composed by smaller chunks and is called building blocks:
+
 - ### Domains objects
   Domain object are abstractions on top of SObjects.
   To create a Domain object just extend Entity class.
   Entity instances are persisted to database using SFTransaction (ApexHawk UnitOfWork implementation).
   Only changed field values are persisted to database. 
-  (It is possible since entity classes implements Observer pattern.
+  It is possible since entity classes implements Observer pattern.
 
-```apex
-public virtual inherited sharing class SaleOpportunity extends Entity {
-
-  public List<SaleOpportunityLineItem> items { public get; protected set; }
-
-  protected SaleOpportunity() {
-    super(Opportunity.SObjectType);
-    this.items = new List<SaleOpportunityLineItem>();
-  }
-
-  protected SaleOpportunity(Opportunity record) {
-    super(record);
-    this.items = new List<SaleOpportunityLineItem>();
-    for (OpportunityLineItem item : record.OpportunityLineItems) {
-        this.items.add(new SaleOpportunityLineItem(item));
+    ```apex
+    public virtual inherited sharing class SaleOpportunity extends Entity {
+    
+      public List<SaleOpportunityLineItem> items { public get; protected set; }
+    
+      protected SaleOpportunity() {
+        super(Opportunity.SObjectType);
+        this.items = new List<SaleOpportunityLineItem>();
+      }
+    
+      protected SaleOpportunity(Opportunity record) {
+        super(record);
+        this.items = new List<SaleOpportunityLineItem>();
+        for (OpportunityLineItem item : record.OpportunityLineItems) {
+            this.items.add(new SaleOpportunityLineItem(item));
+        }
+      }
+    
+      public void applyDiscount(Decimal factor) {
+        for (SaleOpportunityLineItem item : items) {
+            item.applyDiscount(factor);
+        }
+      }
+    
+      public Decimal getTotalValue() {
+        Decimal totalValue = 0;
+        for (SaleOpportunityLineItem item : items) {
+            totalValue = totalValue + item.getTotalPrice();
+        }
+        return totalValue;
+      }
+    
     }
-  }
-
-  public void applyDiscount(Decimal factor) {
-    for (SaleOpportunityLineItem item : items) {
-        item.applyDiscount(factor);
-    }
-  }
-
-  public Decimal getTotalValue() {
-    Decimal totalValue = 0;
-    for (SaleOpportunityLineItem item : items) {
-        totalValue = totalValue + item.getTotalPrice();
-    }
-    return totalValue;
-  }
-
-}
-```
+    ```
 
 - ### Repositories
     - #### Repository interfaces
