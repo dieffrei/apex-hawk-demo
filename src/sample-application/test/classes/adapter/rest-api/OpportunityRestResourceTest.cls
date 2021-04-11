@@ -37,7 +37,7 @@ private class OpportunityRestResourceTest {
         RestContext.request = req;
 
         // when
-        SaleOpportunity result = OpportunityRestResource.getOpportunity();
+        OpportunityRestResource.OpportunityInfo result = OpportunityRestResource.getOpportunity();
 
         // assert
         System.assertNotEquals(null, result);

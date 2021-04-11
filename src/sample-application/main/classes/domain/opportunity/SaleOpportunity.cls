@@ -1,6 +1,6 @@
 global virtual inherited sharing class SaleOpportunity extends Entity {
 
-    public List<SaleOpportunityLineItem> items {public get; protected set;}
+    public List<SaleOpportunityLineItem> items { public get; protected set; }
 
     protected SaleOpportunity() {
         super(Opportunity.SObjectType);
@@ -10,9 +10,10 @@ global virtual inherited sharing class SaleOpportunity extends Entity {
     protected SaleOpportunity(Opportunity record) {
         super(record);
         this.items = new List<SaleOpportunityLineItem>();
-        for (OpportunityLineItem item : record.OpportunityLineItems){
+        for (OpportunityLineItem item : record.OpportunityLineItems) {
             this.items.add(new SaleOpportunityLineItem(item));
         }
+
     }
 
     public void applyDiscount(Decimal factor) {
