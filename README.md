@@ -1,6 +1,7 @@
 # Salesforce Apex Hawk
 
-The purpose of apex hawk is to facilitate ability to apply SOLID principles, good coding practices it born in a attemp to apply Dom Driven Design concepts.
+The purpose of apex hawk is to facilitate ability to apply SOLID principles, good coding practices.
+It was born in a attempt to apply Dom Driven Design concepts.
 One of the biggest problems in salesforce development is that everything is tight to database, since of nature of salesforce, it makes the thing really difficult to decouple them.
 
 ## Building blocks
@@ -148,7 +149,7 @@ public virtual inherited sharing class SaleOpportunity extends Entity {
     }
     ```
   
-###Persistence
+### Persistence
 How to persist an entity instance state?
 - #### Automatic detecting changes on domain objects
     The base class of apex hawk is ```Entity``` class, it has an SObject record internally, 
@@ -200,8 +201,14 @@ How to persist an entity instance state?
     salesforceTransaction.commitZ();
 ```
 - ### Orchestrating and composing transactions
-    ```apex
-    
-    
-    
-    ```
+```apex
+    SFTransaction salesforceTransaction;
+    {
+        new CustomerService()
+            .createCustomer(salesforceTransaction);
+        
+        new OrderService()
+            .createCustomer(salesforceTransaction);
+    }
+    salesforceTransaction.commitZ();
+```
