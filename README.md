@@ -147,3 +147,61 @@ public virtual inherited sharing class SaleOpportunity extends Entity {
     
     }
     ```
+  
+###Persistence
+How to persist an entity instance state?
+- #### Automatic detecting changes on domain objects
+    The base class of apex hawk is ```Entity``` class, it has an SObject record internally, 
+    all changes in a entity should be reflected to the class, it is the way we interact with database.
+    To update/get a field value use ```Entity.put()``` / ```Entity.get()``` methods.
+- #### Transaction / Unit of work
+    Martin Fowler definition for Unit of work pattern is "Maintains a list of objects affected by a business transaction and coordinates the writing out of changes and the resolution of concurrency problems."
+    To persist a Domain object to database use ```SFTransaction``` it works similar as fflib_SObjectUnitOfWork.
+- ### Creating your Transaction
+    ```apex
+    /**
+     * Manages transactions
+     */
+    public inherited sharing class TransactionFactory implements ITransactionFactory {
+    
+        /**
+         * Start a new transaction
+         *
+         * @return
+         */
+        public ITransaction begin() {
+            return new SFTransaction(new Map<Schema.SObjectType, SObjectDMLSettings>{
+                Opportunity.SObjectType => new SObjectDMLSettings(Opportunity.SObjectType),
+                OpportunityLineItem.SObjectType => new SObjectDMLSettings(OpportunityLineItem.SObjectType)
+            });
+        }
+    }
+    
+    ```
+- ### Retrieving a domain object state  
+    - ### Query Specifications
+    
+- ### Persisting a domain object state
+```apex    
+    // initialize salesforce transaction
+    SFTransaction salesforceTransaction = new SFTransaction(new Map<Schema.SObjectType, SObjectDMLSettings>{
+        Opportunity.SObjectType => new SObjectDMLSettings(Opportunity.SObjectType)
+    });
+    
+    // create an entity instance and update
+    SaleOpportunity opportunity = new SaleOpportunity();
+    opportunity.addItem(new SaleOpportunityItem());
+    
+    // register domain object to save (update/insert/upsert).
+    // To delete use ITransaction.remove() method
+    salesforceTransaction.save(opportunity)       
+    
+    // commit is a keyword so method has Z as suffix    
+    salesforceTransaction.commitZ();
+```
+- ### Orchestrating and composing transactions
+    ```apex
+    
+    
+    
+    ```
