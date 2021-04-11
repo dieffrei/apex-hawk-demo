@@ -15,7 +15,9 @@ global with sharing class OpportunityRestResource {
 
     @HttpPatch
     global static void applyDiscount(Id opportunityId, Decimal factor) {
-        ITransaction salesforceTransaction = new TransactionFactory().begin();
+        ITransaction salesforceTransaction = new TransactionFactory()
+            .begin()
+            .verboseMode();
         SaleOpportunityService opportunityService = (SaleOpportunityService) Injector.getInstance(SaleOpportunityService.class);
         opportunityService.applyDiscount(salesforceTransaction, new List<Id>{
             opportunityId

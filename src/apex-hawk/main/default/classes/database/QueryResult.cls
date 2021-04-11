@@ -4,8 +4,9 @@
 @NamespaceAccessible
 public virtual inherited sharing class QueryResult implements IQueryResult {
 
-    private List<SObject> records;
-    private IEntityBuilder entityBuilder;
+    private final List<SObject> records;
+    private final IEntityBuilder entityBuilder;
+    private Integer currentIndex;
 
     /**
      *

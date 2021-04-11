@@ -23,7 +23,7 @@ public virtual inherited sharing class SaleOpportunityRepositoryImpl implements 
     }
 
     public Map<Id, SaleOpportunity> getById(List<Id> saleOpportunityIds) {
-        List<IEntity> results = this.querySpecification.byId(new Set<Id>(saleOpportunityIds)).toList();
+        List<IEntity> results = this.querySpecification.findById(new Set<Id>(saleOpportunityIds)).toList();
         Map<Id, SaleOpportunity> opportunities = new Map<Id, SaleOpportunity>();
         for (IEntity result: results) {
             opportunities.put(result.getId(), (SaleOpportunity) result);
@@ -32,11 +32,16 @@ public virtual inherited sharing class SaleOpportunityRepositoryImpl implements 
     }
 
     public void save(ITransaction sfTransaction, SaleOpportunity salesOpportunity) {
-        sfTransaction.save(salesOpportunity);
+        save(sfTransaction, new List<SaleOpportunity>{salesOpportunity});
     }
 
     public void save(ITransaction sfTransaction, List<SaleOpportunity> saleOpportunities){
-        sfTransaction.save(saleOpportunities);
+        for (SaleOpportunity saleOpportunity : saleOpportunities) {
+            sfTransaction.save(saleOpportunity);
+            for (SaleOpportunityLineItem item : saleOpportunity.items) {
+                sfTransaction.save(item);
+            }
+        }
     }
 
     public void remove(ITransaction sfTransaction, List<SaleOpportunity> saleOpportunities){

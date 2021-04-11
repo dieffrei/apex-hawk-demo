@@ -12,6 +12,7 @@ public inherited sharing class SaleOpportunityServiceImpl implements SaleOpportu
 
     public void applyDiscount(ITransaction salesforceTransaction, List<Id> opportunityIds, Decimal factor) {
         Map<Id, SaleOpportunity> opportunities = this.saleOpportunityRepository.getById(opportunityIds);
+        System.debug('opportunities = ' + JSON.serialize(opportunities));
         for (SaleOpportunity opportunity : opportunities.values()) {
             opportunity.applyDiscount(factor);
             saleOpportunityRepository.save(salesforceTransaction, opportunity);
