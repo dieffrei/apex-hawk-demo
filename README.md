@@ -1,8 +1,7 @@
 # Salesforce Apex Hawk
 
 The purpose of apex hawk is to facilitate ability to apply SOLID principles, good coding practices.
-It was born in a attempt to apply Dom Driven Design concepts.
-One of the biggest problems in salesforce development is that everything is tight to database, since of nature of salesforce, it makes the thing really difficult to decouple them.
+It was born in an attempt to apply Dom Driven Design concepts.
 
 ## Building blocks
 An application can be split into smaller block, each one has very specific responsibility
